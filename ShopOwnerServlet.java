@@ -12,16 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 public class ShopOwnerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // Use POST for register
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if ("register".equals(action)) {
             registerShopOwner(request, response);
-        } else if ("retrieveShopOwner".equals(action)) {
-            retrieveShopOwner(request, response);
         } else {
-            response.getWriter().println("Invalid action specified");
+            response.getWriter().println("Invalid action specified for POST");
         }
     }
+
+    // Use GET for retrieve
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("retrieveShopOwner".equals(action)) {
+            retrieveShopOwner(request, response);
+        } else {
+            response.getWriter().println("Invalid action specified for GET");
+        }
+    }
+
 
     private void registerShopOwner(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter("email");
